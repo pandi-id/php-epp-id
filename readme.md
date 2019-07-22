@@ -1,72 +1,164 @@
-<p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
+php-epp-id
+========
 
-## About Laravel
+This is a modified files from [AfriCC](https://github.com/AfriCC/php-epp2)
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+**php-epp-id** is a High Level Extensible Provisioning Protocol (EPP) TCP/SSL client written in modern PHP.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Released under the GPLv3 License, feel free to contribute (fork, create
+meaningful branchname, issue pull request with thus branchname)!
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
-## Learning Laravel
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+Requirements
+------------
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1400 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+* PHP 5.5+
+* php-ext-intl
+* php-ext-openssl
 
-## Laravel Sponsors
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+Features
+--------
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[British Software Development](https://www.britishsoftware.co)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- [UserInsights](https://userinsights.com)
-- [Fragrantica](https://www.fragrantica.com)
-- [SOFTonSOFA](https://softonsofa.com/)
-- [User10](https://user10.com)
-- [Soumettre.fr](https://soumettre.fr/)
-- [CodeBrisk](https://codebrisk.com)
-- [1Forge](https://1forge.com)
-- [TECPRESSO](https://tecpresso.co.jp/)
-- [Runtime Converter](http://runtimeconverter.com/)
-- [WebL'Agence](https://weblagence.com/)
-- [Invoice Ninja](https://www.invoiceninja.com)
-- [iMi digital](https://www.imi-digital.de/)
-- [Earthlink](https://www.earthlink.ro/)
-- [Steadfast Collective](https://steadfastcollective.com/)
-- [We Are The Robots Inc.](https://watr.mx/)
-- [Understand.io](https://www.understand.io/)
-- [Abdel Elrafa](https://abdelelrafa.com)
-- [Hyper Host](https://hyper.host)
+* modern PHP standards
+    * [PSR-1](http://www.php-fig.org/psr/psr-1/), [PSR-2](http://www.php-fig.org/psr/psr-2/) & [PSR-4](http://www.php-fig.org/psr/psr-4/)
+    * notice and warning free (find them, and I'll fix it!)
+* high-level usage (Plug & Play)
+* simplified client (auto login/logout, auto inject clTRID)
+* SSL (+local-cert)
+* XPath like setter to simplify the creation of complex XML structures
+* XML based responses for direct traversal via XPath
+* [RFC 5730](http://tools.ietf.org/html/rfc5730), [RFC 5731](http://tools.ietf.org/html/rfc5731), [RFC 5732](http://tools.ietf.org/html/rfc5732), [RFC 5733](http://tools.ietf.org/html/rfc5733), [RFC 5734](http://tools.ietf.org/html/rfc5734) & [RFC 3915](http://tools.ietf.org/html/rfc3915)
 
-## Contributing
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Install
+-------
 
-## Security Vulnerabilities
+Via Composer
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+```
+$ composer require Pandi/php-epp2
+```
 
-## License
 
-The Laravel framework is open-source software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Usage
+-----
+
+See the [examples](https://github.com/Pandi/php-epp2/blob/master/examples)
+folder for a more or less complete usage reference. Additionally have a look at 
+[whmcs-registrars-coza](https://github.com/Pandi/whmcs-registrars-coza)
+which is a [WHMCS](https://www.whmcs.com) Registrar Module for the
+[co.za zone](https://www.registry.net.za) using this library.
+
+
+### Basic Client Connection
+
+this will automatically login on connect() and logout on close()
+
+```php
+<?php
+require 'vendor/autoload.php';
+
+use Pandi\EPP\Client as EPPClient;
+
+$epp_client = new EPPClient([
+    'host' => 'epptest.org',
+    'username' => 'foo',
+    'password' => 'bar',
+    'services' => [
+        'urn:ietf:params:xml:ns:domain-1.0',
+        'urn:ietf:params:xml:ns:contact-1.0'
+    ],
+    'debug' => true,
+]);
+
+try {
+    $greeting = $epp_client->connect();
+} catch(Exception $e) {
+    echo $e->getMessage() . PHP_EOL;
+    unset($epp_client);
+    exit(1);
+}
+
+$epp_client->close();
+```
+
+
+### Create Frame Objects
+
+setXXX() indicates that value can only be set once, re-calling the method will
+overwrite the previous value.
+
+addXXX() indicates that multiple values can exist, re-calling the method will
+add values.
+
+```php
+<?php
+require 'vendor/autoload.php';
+
+use Pandi\EPP\Frame\Command\Create\Host as CreateHost;
+
+$frame = new CreateHost;
+$frame->setHost('ns1.example.com');
+$frame->setHost('ns2.example.com');
+$frame->addAddr('8.8.8.8');
+$frame->addAddr('8.8.4.4');
+$frame->addAddr('2a00:1450:4009:809::1001');
+echo $frame;
+
+// or send frame to previously established connection
+$epp_client->sendFrame($frame);
+```
+
+
+### Parse Response
+
+You can either access nodes directly by passing through a xpath or use the data()
+Method which will return an assoc array.
+
+```php
+use Pandi\EPP\Frame\Command\Check\Domain as DomainCheck;
+use Pandi\EPP\Frame\Response;
+
+$frame = new DomainCheck;
+$frame->addDomain('example.org');
+$frame->addDomain('example.net');
+$frame->addDomain('example.com');
+
+$response = $epp_client->request($frame);
+if (!($response instanceof Response)) {
+    echo 'response error' . PHP_EOL;
+    unset($epp_client);
+    exit(1);
+}
+
+echo $response->code() . PHP_EOL;
+echo $response->message() . PHP_EOL;
+echo $response->clientTransactionId() . PHP_EOL;
+echo $response->serverTransactionId() . PHP_EOL;
+$data = $response->data();
+if (empty($data) || !is_array($data)) {
+    echo 'empty response data' . PHP_EOL;
+    unset($epp_client);
+    exit(1);
+}
+
+foreach ($data['chkData']['cd'] as $cd) {
+    printf('Domain: %s, available: %d' . PHP_EOL, $cd['name'], $cd['@name']['avail']);
+}
+```
+
+Credits
+-------
+
+* [AfriCC](https://github.com/AfriCC/php-epp2)
+
+License
+-------
+
+php-epp-id is released under the GPLv3 License. See the bundled
+[LICENSE](https://github.com/Pandi/php-epp-id/blob/master/LICENSE) file for
+details.
+
