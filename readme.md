@@ -39,7 +39,7 @@ Install
 Via Composer
 
 ```
-$ composer require Pandi/php-epp2
+$ composer require Pandi/php-epp-id
 ```
 
 
