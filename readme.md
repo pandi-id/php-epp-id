@@ -46,11 +46,8 @@ $ composer require Pandi/php-epp-id
 Usage
 -----
 
-See the [examples](https://github.com/Pandi/php-epp2/blob/master/examples)
-folder for a more or less complete usage reference. Additionally have a look at 
-[whmcs-registrars-coza](https://github.com/Pandi/whmcs-registrars-coza)
-which is a [WHMCS](https://www.whmcs.com) Registrar Module for the
-[co.za zone](https://www.registry.net.za) using this library.
+See the [examples](https://github.com/pandi-id/php-epp-id/tree/master/examples)
+folder for a more or less complete usage reference.
 
 
 ### Basic Client Connection
