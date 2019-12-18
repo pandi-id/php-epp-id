@@ -38,6 +38,8 @@ class Client
     protected $connect_timeout;
     protected $timeout;
     protected $chunk_size;
+    protected $verify_peer;
+    protected $allow_self_signed;
 
     public function __construct(array $config)
     {
@@ -108,6 +110,18 @@ class Client
         } else {
             $this->chunk_size = 1024;
         }
+
+        if (!empty($config['verify_peer'])) {
+            $this->verify_peer = true;
+        } else {
+            $this->verify_peer = false;
+        }
+
+        if (!empty($config['allow_self_signed'])) {
+            $this->allow_self_signed = true;
+        } else {
+            $this->allow_self_signed = false;
+        }
     }
 
     public function __destruct()
@@ -124,8 +138,8 @@ class Client
             $proto = 'ssl';
 
             $context = stream_context_create();
-            stream_context_set_option($context, 'ssl', 'verify_peer', false);
-            stream_context_set_option($context, 'ssl', 'allow_self_signed', true);
+            stream_context_set_option($context, 'ssl', 'verify_peer', $this->verify_peer);
+            stream_context_set_option($context, 'ssl', 'allow_self_signed', $this->allow_self_signed);
 
             if ($this->local_cert !== null) {
                 stream_context_set_option($context, 'ssl', 'local_cert', $this->local_cert);
