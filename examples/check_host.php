@@ -11,7 +11,7 @@ require '../vendor/autoload.php';
 use Pandi\EPP\Frame\Command\Check\Host as CheckHost;
 
 $frame = new CheckHost();
-$frame->addHost('ns1.example.com');
-$frame->addHost('ns2.example.com');
-$frame->addHost('ns3.example.com');
+$frame->addHost('ns1.pandi.id');
+$frame->addHost('ns2.pandi.id');
+$frame->addHost('ns3.pandi.id');
 echo $frame;

@@ -11,7 +11,7 @@ require '../vendor/autoload.php';
 use Pandi\EPP\Frame\Command\Check\Domain as CheckDomain;
 
 $frame = new CheckDomain();
-$frame->addDomain('example.com');
-$frame->addDomain('example.org');
-$frame->addDomain('example.net');
+$frame->addDomain('pandi.id');
+$frame->addDomain('pandi.my.id');
+$frame->addDomain('pandi.web.id');
 echo $frame;
