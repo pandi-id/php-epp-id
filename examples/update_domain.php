@@ -18,5 +18,8 @@ $frame->addHostObj('ns1.google.com');
 $frame->addHostAttr('ns2.google.com', ['8.8.8.8', '2a00:1450:4009:809::100e']);
 $frame->addStatus('clientHold', 'Payment overdue.');
 $frame->removeHostAttr('ns3.google.com');
+$frame->addSecDNSdsData(275, 13, 1, "2810CA3D92CD618CD8179A6262C0G2C6C27F60F5CDF4DD366F18ABE1D10C010C");
+// $frame->removeSecDNSdsData(275, 13, 1, "2810CA3D92CD618CD8179A6262C0G2C6C27F60F5CDF4DD366F18ABE1D10C010C");
+// $frame->removeSecDNSAll(true);
 $pw = $frame->changeAuthInfo();
 echo $frame;

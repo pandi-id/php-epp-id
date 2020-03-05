@@ -23,5 +23,7 @@ $frame->addHostAttr('ns2.google.com');
 $frame->setRegistrant('C001');
 $frame->setAdminContact('C002');
 $frame->setTechContact('C003');
+$frame->addSecDNSdsData(275, 13, 1, "2810CA3D92CD618CD8179A6262C0G2C6C27F60F5CDF4DD366F18ABE1D10C010C");
 $frame->setAuthInfo();
+
 echo $frame;
